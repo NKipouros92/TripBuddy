@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Trip Description</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam/css/bootstrap.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/success">Home</a>
+                    <a href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <h2>{{trip.name}} </h2>
+        <p>Planned by: {{trip.uploader.name}} </p>
+        <p>Description: {{trip.description}} </p>
+        <p>Travel Date From: {{trip.date_from}} </p>
+        <p>Travel Date To: {{trip.date_to}} </p>
+    </div>
+    <div class="container-fluid">
+        <h2>Other users' joining this trip: </h2>
+        {% for user in users %}
+        {% if user.id != trip.uploader.id %}
+        <p>{{user.name}}</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Login/Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam/css/bootstrap.css' %}">
+</head>
+<body>
+        <div class="center-block" style="padding:60px; border: 2px solid black; margin:10px; display: inline-block;">
+            <h1>Register</h1>
+            <form action="/create" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name: </label><input type="text" name="name" class="form-control" id="name" style="display: block">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username: </label><input type="text" name="username" class="form-control" id="username" style="display: block">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: </label><input type="password" name="password" class="form-control" id="password" style="display: block">
+                </div>
+                <div class="form-group">
+                    <p style="font-size: 12px">*Password should be at least 8 characters</p>
+                    <label for="repeat">Repeat Password: </label><input type="password" name="repeat" class="form-control" id="repeat" style="display: block">
+                </div>
+                <input type="submit" value="Register!" class="text-primary" style="display: block; margin-top: 5px">
+                {% if messages %}
+                {% for message in messages %}
+                {% if "register" in message.tags %}
+                <p class="text-danger">{{ message }}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+        <div class="center-block" style="padding:60px; margin:10px; border: 2px solid black; display: inline-block; vertical-align: top;">
+            <h1>Login</h1>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="loguser">Username: </label><input type="text" name="loguser" class="form-control" id="loguser" style="display: block">
+                </div>
+                <div class="form-group">
+                    <label for="logpassword">Password: </label><input type="password" name="logpassword" class="form-control" id="logpassword" style="display: block">
+                </div>
+                <input type="submit" value="Login!" class="text-primary" style="display: block; margin-top: 5px">
+                {% if messages %}
+                {% for message in messages %}
+                {% if "login" in message.tags %}
+                <p class="text-danger">{{ message }}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+</body>
+</html>
